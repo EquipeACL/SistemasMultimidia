@@ -6,6 +6,7 @@ import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.EncoderException;
 import it.sauronsoftware.jave.EncodingAttributes;
 import it.sauronsoftware.jave.VideoAttributes;
+import it.sauronsoftware.jave.VideoSize;
 import java.io.File;
 
 /**
@@ -25,6 +26,10 @@ public class VideoToVideo {
         video.setCodec(videoEncoder.getVideo().getCodecVideo());
         video.setBitRate(videoEncoder.getVideo().getVideoBitRate());
         video.setFrameRate(videoEncoder.getVideo().getVideoFrameRate());
+        Integer[] resolucao = videoEncoder.getVideo().getResolucao();
+        if(resolucao.length==2){
+            video.setSize(new VideoSize(resolucao[0],resolucao[1]));
+        }
         //video.setSize(new VideoSize(400, 300));
         EncodingAttributes attrs = new EncodingAttributes();
         attrs.setFormat(videoEncoder.getVideo().getFormato());

@@ -63,6 +63,7 @@ public class TelaVideoToAudio extends javax.swing.JFrame {
         taxaSamplingSeletor = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -154,6 +155,9 @@ public class TelaVideoToAudio extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(220, 220, 220))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(243, 243, 243))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(taxBitsNome, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -183,8 +187,8 @@ public class TelaVideoToAudio extends javax.swing.JFrame {
                                 .addComponent(jLabel6)))
                         .addGap(59, 59, 59))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(223, 223, 223))))
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,9 +225,11 @@ public class TelaVideoToAudio extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(taxaSamplingSeletor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGap(40, 40, 40)
                 .addComponent(jButton1)
-                .addContainerGap())
+                .addGap(44, 44, 44)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -301,13 +307,19 @@ public class TelaVideoToAudio extends javax.swing.JFrame {
                     Integer.parseInt(taxaSamplingSeletor.getSelectedItem().toString()),""
             );
         }
-        
-        try {
-            VideoToAudio.convertToAudio(sound,textoInput.getText().replace('\\', '/'),textoOutput.getText().replace('\\', '/'));
-        } catch (IllegalArgumentException | EncoderException | IOException ex) {
-            Logger.getLogger(VideoToAudio.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+       Thread t = new Thread(){
+            
+            @Override
+            public void run(){
+                try {
+                    VideoToAudio.convertToAudio(sound, textoInput.getText().replace('\\', '/'), textoOutput.getText().replace('\\', '/'));
+                } catch (IllegalArgumentException | EncoderException | IOException ex) {
+                    Logger.getLogger(VideoToAudio.class.getName()).log(Level.SEVERE, null, ex);
+                }             
+            }
+            
+        };
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void textoInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoInputActionPerformed
@@ -330,6 +342,7 @@ public class TelaVideoToAudio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JRadioButton mp3;
     private javax.swing.JLabel outputNome;
     private javax.swing.JLabel taxBitsNome;

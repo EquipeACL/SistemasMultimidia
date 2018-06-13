@@ -17,6 +17,7 @@ public class Video {
     private String formato;
     private int canais;
     private String codecVideo;
+    private Integer[] resolucao = new Integer[]{};
 
     public Video(Audio audio, int videoBitRate, int videoFrameRate, String formato, int canais, String codecVideo) {
         this.audio = audio;
@@ -75,6 +76,11 @@ public class Video {
         this.canais = canais;
     }
  
+    public void setResolucao(Integer[] resolucao){
+        this.resolucao = resolucao;
+    }
     
-    
+    public Integer[] getResolucao(){
+        return this.resolucao;
+    }
 }
