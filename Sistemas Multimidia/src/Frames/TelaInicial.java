@@ -9,6 +9,7 @@ import Metodos.VideoToAudio;
 import Metodos.VideoToVideo;
 import Objetos.Audio;
 import Videos.IFVideo;
+import background.Background;
 import it.sauronsoftware.jave.EncoderException;
 import java.awt.Desktop;
 import java.io.File;
@@ -20,7 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.border.TitledBorder;
+
 
 /**
  *
@@ -56,6 +57,7 @@ public class TelaInicial extends javax.swing.JFrame {
         this.setIconImage(new ImageIcon(getClass().getResource("/icones/logo.jpg")).getImage());
         jTextField1.setText(NAME_ADDRESS_ARCHIVE_OUTPUT);
         jTextField2.setText(NAME_ADDRESS_ARCHIVE_OUTPUT);
+        Background b = new Background(this);
     }
 
     /**
@@ -89,6 +91,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         opcoes = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         sobre = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -340,6 +343,14 @@ public class TelaInicial extends javax.swing.JFrame {
         opcoes.setText("Opções");
         opcoes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        jMenuItem4.setText("Rodar em Segundo Plano");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        opcoes.add(jMenuItem4);
+
         jMenuItem1.setText("Alterar Pasta de Destino");
         jMenuItem1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -582,6 +593,11 @@ public class TelaInicial extends javax.swing.JFrame {
         painelMusica.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel avi;
     private javax.swing.JLabel flv;
@@ -594,6 +610,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -618,8 +635,7 @@ public class TelaInicial extends javax.swing.JFrame {
             } catch (IllegalArgumentException | EncoderException | IOException ex) {
                 Logger.getLogger(VideoToAudio.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-            end();
+            end(VideoMp3.getName().substring(0,VideoMp3.getName().indexOf(".")+1)+"mp3");
         }
     };
 
@@ -630,7 +646,7 @@ public class TelaInicial extends javax.swing.JFrame {
             } catch (IllegalArgumentException | EncoderException | IOException ex) {
                 Logger.getLogger(VideoToAudio.class.getName()).log(Level.SEVERE, null, ex);
             }
-            end();
+            end(VideoWav.getName().substring(0,VideoWav.getName().indexOf(".")+1)+"wav");
         }
     };
 
@@ -641,7 +657,7 @@ public class TelaInicial extends javax.swing.JFrame {
             } catch (IllegalArgumentException | EncoderException ex) {
                 Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
             }
-            end();
+            end(VideoMp4.getVideo().getNome()+".mp4");
         }
     };
 
@@ -652,7 +668,7 @@ public class TelaInicial extends javax.swing.JFrame {
             } catch (IllegalArgumentException | EncoderException ex) {
                 Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
             }
-            end();
+            end(VideoAvi.getVideo().getNome()+".avi");
         }
     };
 
@@ -663,7 +679,7 @@ public class TelaInicial extends javax.swing.JFrame {
             } catch (IllegalArgumentException | EncoderException ex) {
                 Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
             }
-            end();
+            end(Video3gp.getVideo().getNome()+".3gp");
         }
 
     };
@@ -675,7 +691,7 @@ public class TelaInicial extends javax.swing.JFrame {
             } catch (IllegalArgumentException | EncoderException ex) {
                 Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
             }
-            end();
+            end(VideoFlv.getVideo().getNome()+".flv");
         }
     };
 
@@ -695,8 +711,9 @@ public class TelaInicial extends javax.swing.JFrame {
         painelVideo.add(m);
     }
 
-    public void end() {
+    public void end(String arquivo) {
         m.setLoading("concluido.png");
+        Background.notifyMessage(arquivo);
     }
 
 }

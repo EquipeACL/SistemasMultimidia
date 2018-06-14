@@ -409,6 +409,7 @@ public class JVideoToVideo extends javax.swing.JDialog {
             NAME_ARCHIVE_INPUT = NAME_ARCHIVE_OUTPUT = "\\" + fileSelected.substring(0, fileSelected.indexOf("."));
             caixaInput.setText(j.getCurrentDirectory().toString() + "\\" + fileSelected);
             jTextField1.setText(NAME_ADDRESS_ARCHIVE_OUTPUT + NAME_ARCHIVE_INPUT + "." + extensao);
+            
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(JVideoToVideo.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e) {
@@ -437,6 +438,7 @@ public class JVideoToVideo extends javax.swing.JDialog {
                     Integer.parseInt(taxaCanaisSeletor1.getSelectedItem().toString()),
                     jComboBox2.getSelectedItem().toString()
             );
+            video.setNome(NAME_ARCHIVE_OUTPUT.substring(1));
             switch (extensao) {
                 case "flv":
                     formato = new FormatoFLV();

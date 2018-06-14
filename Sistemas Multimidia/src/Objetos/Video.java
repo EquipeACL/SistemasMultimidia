@@ -11,6 +11,7 @@ package Objetos;
  */
 public class Video {
     
+    private String nome;
     private Audio audio;
     private int videoBitRate;
     private int videoFrameRate;
@@ -32,6 +33,14 @@ public class Video {
     public Video() {
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
     public Audio getAudio() {
         return audio;
     }

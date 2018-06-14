@@ -243,7 +243,7 @@ public class JVideoToAudio extends javax.swing.JDialog {
             NAME_ARCHIVE_INPUT = NAME_ARCHIVE_OUTPUT = "\\" + fileSelected.substring(0, fileSelected.indexOf("."));
             textoInput.setText(j.getCurrentDirectory().toString() + "\\" + fileSelected);
             textoOutput.setText(NAME_ADDRESS_ARCHIVE_OUTPUT + NAME_ARCHIVE_INPUT + "." + extensao);
-
+            
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(VideoToAudio.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e) {
